@@ -1,0 +1,40 @@
+<!-- xhsframework/component/RichInput/RichInput.wxml -->
+<view class="richText">
+  <block wx:key="index" wx:for="{{project_content}}">
+    <view class="textItem">
+      <view class="titleBox">
+        <view class="item_title">
+          {{item.type === "text" ? "文字" : (item.type === "image" ? "图片" : "视频")}}
+        </view>
+        <image class="img_btn upBtn" bindtap="topmove" data-index="{{index}}"
+          src="/resources/images/publish/richinput_up.png" wx:if="{{project_content.length > 1 && index !== 0}}">
+        </image>
+        <image class="img_btn downBtn" bindtap="downmove" data-index="{{index}}"
+          src="/resources/images/publish/richinput_down.png"
+          wx:if="{{project_content.length > 1 && index !== project_content.length - 1}}"></image>
+        <image class="img_btn delBtn" bindtap="delemessage" data-index="{{index}}"
+          src="/resources/images/common/alert_close.png"></image>
+      </view>
+      <textarea placeholder-class="placeholder_text" class="textarea" placeholder="{{placeholder}}"
+        bindinput="bindinput" data-index="{{index}}" value="{{item.content}}" wx:if="{{item.type=='text'}}"
+        placeholder-class="placeholder_text" maxlength="300" />
+      <image wx:if="{{item.type=='image'}}" src="{{item.content}}" class="richImage" mode="aspectFill"></image>
+      <video wx:if="{{item.type=='video'}}" src="{{item.content}}" class="richImage"></video>
+      <!-- <view class="addBtn">+</view> -->
+    </view>
+  </block>
+  <view class="tools">
+    <view class="tool_item">
+      <image class="item_image" bindtap="addVideo" src="/resources/images/publish/richinput_video.png"></image>
+      <view class="item_title">视频</view>
+    </view>
+    <view class="tool_item">
+      <image class="item_image" bindtap="addimage" src="/resources/images/publish/richinput_image.png"></image>
+      <view class="item_title">图片</view>
+    </view>
+    <view class="tool_item">
+      <image class="item_image" bindtap="addmessage" src="/resources/images/publish/richinput_text.png"></image>
+      <view class="item_title">文字</view>
+    </view>
+  </view>
+</view>
